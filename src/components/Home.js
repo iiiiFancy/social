@@ -1,11 +1,11 @@
 import React from 'react';
 import $ from 'jquery';
-import { Tabs, Button, Spin } from 'antd';
+import { Tabs, Spin } from 'antd';
 import { GEO_OPTIONS, POS_KEY, AUTH_PREFIX, TOKEN_KEY, API_ROOT } from '../constants';
 import { Gallery } from './Gallery';
+import { CreatePostButton } from './CreatePostButton';
 
 const TabPane = Tabs.TabPane;
-const operations = <Button>Extra Action</Button>;
 
 export class Home extends React.Component {
     state = {
@@ -21,7 +21,7 @@ export class Home extends React.Component {
     }
 
     getGeoLocation = () => {
-        if ('geolocation' in navigator) {
+        if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(
                 this.onSuccessLoadGeoLocation,
                 this.onFailedLoadGeolocation,
@@ -72,8 +72,8 @@ export class Home extends React.Component {
     loadNearbyPosts = () => {
         const { lat, lon } = JSON.parse(localStorage.getItem(POS_KEY));
         this.setState({ loadingPosts: true, error: ''});
-        $.ajax({
-            url: `${API_ROOT}/search?lat=${lat}&lon=${lon}&range=20000`,
+        return $.ajax({
+            url: `${API_ROOT}/search?lat=${lat}&lon=${lon}&range=20`,
             method: 'GET',
             headers: {
                 Authorization: `${AUTH_PREFIX} ${localStorage.getItem(TOKEN_KEY)}`
@@ -90,8 +90,10 @@ export class Home extends React.Component {
     }
 
     render() {
+        const createPostButton = <CreatePostButton loadNearbyPosts={this.loadNearbyPosts}/>;
+
         return (
-            <Tabs tabBarExtraContent={operations} className="main-tabs">
+            <Tabs tabBarExtraContent={createPostButton} className="main-tabs">
                 <TabPane tab="Posts" key="1">
                     {this.getGalleryPanelContent()}
                 </TabPane>
