@@ -17,20 +17,31 @@
 }
 
 .App-header {
-  background-color: #222;
+  background-color: #990000;
   height: 60px;
   color: white;
 }
 
 .App-title {
   font-size: 1.5em;
-  color: #61dafb;
+  color: #FFCC00;
   padding-top: 16px;
   float: left;
+  margin-left: 30px;
+  font-family: 'Times New Roman';
 }
 
 .App-intro {
   font-size: large;
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
 }
 
 @keyframes App-logo-spin {
