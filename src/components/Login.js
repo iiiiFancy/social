@@ -3,7 +3,8 @@ import $ from 'jquery';
 import { Form, Icon, Input, Button, message } from 'antd';
 import { Link } from 'react-router-dom';
 import { API_ROOT } from '../constants';
-
+import Tilt from 'react-tilt';
+import tiltImg from '../assets/images/logo.svg'
 const FormItem = Form.Item;
 
 class NormalLoginForm extends React.Component {
@@ -33,6 +34,17 @@ class NormalLoginForm extends React.Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <Form onSubmit={this.handleSubmit} className="login-form">
+                <div className='ma4 mt0'>
+                    <Tilt className="Tilt br2 shadow-2" options={{ max : 55 }} style={{ height: 150, width: 150 }} >
+                        <div className="Tilt-inner pa3">
+                            <img className="tilt" alt='logo' src={tiltImg}/>
+                        </div>
+                    </Tilt>
+                </div>
+                <span style={{color: '#1890ff', display: 'block', fontFamily: 'Times', fontWeight: 'Bolder'}}>
+                    Record your journey & Explore others
+                </span>
+                <br/>
                 <FormItem>
                     {getFieldDecorator('username', {
                         rules: [{ required: true, message: 'Please input your username!' }],
