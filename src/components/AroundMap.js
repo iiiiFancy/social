@@ -28,6 +28,13 @@ class AroundMap extends React.Component {
         window.map = map;
     }
     render() {
+	if (JSON.parse(localStorage.getItem(POS_KEY)) == null) {
+		return (
+			<div>
+				Sorry, we cannot get your location :(
+			</div>
+		);
+	}
         const { lat, lon } = JSON.parse(localStorage.getItem(POS_KEY)); // 本机坐标存在localStorage里
         return (
             <GoogleMap
